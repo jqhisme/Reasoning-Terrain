@@ -1,0 +1,90 @@
+:root {
+  color-scheme: light;
+  --bg: #f6f3ea;
+  --panel: #ebe7dc;
+  --panel-strong: #ded9cc;
+  --text: #242a28;
+  --muted: #6f756f;
+  --line: #cbc6b9;
+  --accent: #095256;
+  --white: #fffdf8;
+}
+
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.5 Inter, ui-sans-serif, system-ui, sans-serif; }
+button, textarea, select { font: inherit; }
+
+.app-shell { display: grid; grid-template-columns: 232px minmax(0, 1fr); min-height: 100vh; padding: 24px; gap: 18px; }
+.session-rail, .visualization-panel, .detail-panel, .question-panel, .answer-panel { border: 1px solid var(--line); background: var(--panel); }
+.session-rail { position: sticky; top: 24px; display: flex; flex-direction: column; justify-content: space-between; height: calc(100vh - 48px); padding: 28px; }
+.session-rail h1 { margin: 6px 0 20px; font-size: clamp(27px, 2.2vw, 38px); font-weight: 450; letter-spacing: -.04em; line-height: 1.02; }
+.eyebrow { margin: 0 0 5px; color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.status { color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
+.text-button { padding: 0; background: transparent; color: var(--text); border: 0; text-align: left; cursor: pointer; }
+.text-button:hover { color: var(--accent); }
+.text-button:disabled { opacity: .45; cursor: wait; }
+
+.workspace { display: grid; grid-template-columns: minmax(0, 1fr) minmax(250px, 340px); grid-template-rows: minmax(560px, 64vh) minmax(300px, auto); gap: 18px; min-width: 0; }
+.visualization-panel { position: relative; min-width: 0; overflow: hidden; background: var(--white); }
+.panel-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.plot-heading { position: absolute; z-index: 2; top: 24px; left: 26px; }
+.panel-heading h2, .detail-panel h2 { margin: 0; font-size: 18px; font-weight: 520; letter-spacing: -.02em; }
+.interaction-hint { margin: 19px 0 0; color: var(--muted); font-size: 12px; white-space: nowrap; }
+
+.plot-controls { position: absolute; z-index: 3; top: 20px; right: 22px; display: flex; gap: 9px; }
+.plot-controls label { display: grid; gap: 4px; }
+.plot-controls label > span { color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+select { min-width: 142px; padding: 8px 30px 8px 10px; background: var(--white); color: var(--text); border: 1px solid var(--line); border-radius: 2px; }
+#plot { width: 100%; height: 100%; min-height: 560px; cursor: grab; }
+#plot:active { cursor: grabbing; }
+#plot svg { display: block; }
+
+.legend { position: absolute; right: 24px; bottom: 22px; z-index: 2; display: grid; gap: 6px; padding: 11px 13px; background: #fffdf8e6; border: 1px solid var(--line); color: var(--muted); font-size: 12px; pointer-events: none; }
+.legend span::before { display: inline-block; width: 8px; height: 8px; margin-right: 7px; background: var(--c); border-radius: 50%; content: ""; }
+
+.detail-panel { padding: 26px; overflow: hidden; }
+.point-detail { max-height: calc(64vh - 118px); margin-top: 24px; padding-top: 18px; overflow-y: auto; border-top: 1px solid var(--line); white-space: pre-wrap; overflow-wrap: anywhere; }
+.point-detail.empty, .answer.empty { color: var(--muted); }
+.point-meta { display: flex; gap: 8px; margin-bottom: 14px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .07em; }
+.point-meta::before { width: 8px; height: 8px; margin-top: 4px; background: var(--point-color); border-radius: 50%; content: ""; }
+
+.question-panel, .answer-panel { min-width: 0; padding: 26px; }
+.question-panel { display: grid; grid-template-rows: auto minmax(150px, 1fr) auto; gap: 18px; }
+.question-panel textarea { width: 100%; min-height: 150px; padding: 0; resize: none; background: transparent; color: var(--text); border: 0; outline: 0; }
+.question-panel button { justify-self: start; min-width: 100px; padding: 10px 18px; background: var(--accent); color: var(--white); border: 1px solid var(--accent); cursor: pointer; }
+.question-panel button:hover { background: #063f42; }
+.question-panel button:disabled { opacity: .5; cursor: wait; }
+.answer-panel { grid-column: 2; grid-row: 2; background: var(--panel-strong); }
+.answer { max-height: 520px; margin-top: 22px; overflow: auto; overflow-wrap: anywhere; }
+.answer > :first-child { margin-top: 0; }
+.answer h1, .answer h2, .answer h3 { margin: 1.35em 0 .5em; font-weight: 550; line-height: 1.25; }
+.answer h1 { font-size: 1.45rem; } .answer h2 { font-size: 1.2rem; } .answer h3 { font-size: 1.05rem; }
+.answer p, .answer ul, .answer ol, .answer pre, .answer table, .answer blockquote { margin: 0 0 1em; }
+.answer a { color: var(--accent); }
+.answer code { padding: .12em .35em; background: var(--bg); }
+.answer pre { padding: 14px; overflow-x: auto; background: var(--bg); }
+.answer pre code { padding: 0; background: transparent; }
+.answer table { width: 100%; border-collapse: collapse; }
+.answer th, .answer td { padding: 8px 10px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+.answer blockquote { margin-left: 0; padding-left: 14px; color: var(--muted); border-left: 3px solid #5aaa95; }
+.tooltip { position: absolute; z-index: 10; max-width: 300px; padding: 8px 10px; background: var(--text); color: var(--white); border-radius: 2px; box-shadow: 0 8px 28px #242a2833; opacity: 0; pointer-events: none; }
+
+@media (max-width: 1050px) {
+  .app-shell { grid-template-columns: 170px minmax(0, 1fr); }
+  .workspace { grid-template-columns: minmax(0, 1fr) 260px; }
+  .plot-controls { top: 86px; left: 24px; right: auto; }
+}
+
+@media (max-width: 760px) {
+  .app-shell { display: block; padding: 14px; }
+  .session-rail { position: static; flex-direction: row; align-items: flex-end; height: auto; margin-bottom: 14px; padding: 20px; }
+  .session-rail h1 { margin-bottom: 8px; }
+  .workspace { display: grid; grid-template-columns: 1fr; grid-template-rows: auto; }
+  .visualization-panel, .detail-panel, .question-panel, .answer-panel { grid-column: 1; grid-row: auto; }
+  .visualization-panel { min-height: 560px; }
+  .detail-panel { min-height: 220px; }
+  .point-detail, .answer { max-height: 420px; }
+  .plot-controls { right: 14px; left: 14px; flex-wrap: wrap; }
+  .plot-controls select { min-width: 130px; }
+}

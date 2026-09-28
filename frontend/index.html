@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reasoning Terrace</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.4/dist/purify.min.js"></script>
+</head>
+<body>
+  <main class="app-shell">
+    <aside class="session-rail">
+      <div>
+        <p class="eyebrow">Live workspace</p>
+        <h1>Reasoning<br>Terrace</h1>
+        <div id="status" class="status" aria-live="polite">Waiting for a task…</div>
+      </div>
+      <button id="new-session" class="text-button" type="button">Clear session</button>
+    </aside>
+
+    <section class="workspace">
+      <section class="visualization-panel">
+        <div class="panel-heading plot-heading">
+          <div><p class="eyebrow">Semantic view</p><h2>KDE plot</h2></div>
+          <p class="interaction-hint">Drag to pan · Scroll to zoom</p>
+        </div>
+        <div class="plot-controls" aria-label="Plot controls">
+          <label><span>Grouping</span><select id="density-mode">
+            <option value="all">All points</option>
+            <option value="task">Group by task</option>
+          </select></label>
+          <label><span>KDE style</span><select id="density-style">
+            <option value="outline">Outline only</option>
+            <option value="fill">Fill</option>
+            <option value="smooth">Smooth distribution</option>
+          </select></label>
+        </div>
+        <div id="plot" role="img" aria-label="Live two-dimensional map of agent events"></div>
+        <div id="legend" class="legend" aria-label="Point category legend"></div>
+      </section>
+
+      <aside class="detail-panel">
+        <p class="eyebrow">Selected point</p>
+        <h2 id="detail-title">Point details</h2>
+        <div id="point-detail" class="point-detail empty">Click a point to read its full text.</div>
+      </aside>
+
+      <form id="ask-form" class="question-panel">
+        <div class="panel-heading"><div><p class="eyebrow">Prompt</p><h2>Question</h2></div></div>
+        <textarea id="prompt" required placeholder="Ask Codex to research, analyze, or work with files in this workspace…"></textarea>
+        <button id="submit" type="submit">Run</button>
+      </form>
+
+      <section class="answer-panel">
+        <div class="panel-heading"><div><p class="eyebrow">Response</p><h2>Final answer</h2></div></div>
+        <div id="answer" class="answer empty" aria-live="polite">The answer will appear when the agent completes.</div>
+      </section>
+    </section>
+  </main>
+  <div id="tooltip" class="tooltip" role="tooltip"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

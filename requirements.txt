@@ -1,0 +1,9 @@
+openai-codex==0.156.1
+python-dotenv>=1.0
+fastapi>=0.115
+uvicorn[standard]>=0.34
+transformers>=4.48
+torch>=2.5
+numpy>=1.26
+scikit-learn>=1.6
+umap-learn==0.5.12
